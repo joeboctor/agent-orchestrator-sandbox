@@ -5,3 +5,23 @@
 strict = true
 python_version = "3.10"
 files = ["math_utils.py"]
+
+[tool.pytest.ini_options]
+# Coverage gate for math_utils (unit F-001-U-4).
+# pytest-cov is invoked automatically via addopts so that any local or CI
+# run of `pytest` enforces the 100% threshold without needing extra flags.
+addopts = "--cov=math_utils --cov-report=term-missing --cov-fail-under=100"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+# Measure branch coverage too, so an untested branch (e.g. the b == 0
+# guard in div) also counts as missing coverage.
+branch = true
+source = ["math_utils"]
+
+[tool.coverage.report]
+# Match the pytest --cov-fail-under threshold so direct `coverage report`
+# invocations enforce the same gate.
+fail_under = 100
+show_missing = true
+skip_covered = false
