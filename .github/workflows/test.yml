@@ -1,0 +1,37 @@
+name: tests
+
+# Run the test suite on every push and pull request targeting main.
+# Any test failure must fail the PR check (this is the default behavior:
+# the job's exit code propagates from `pytest`, and a non-zero exit fails
+# the workflow, which fails the required PR check).
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: pytest (Python 3.12)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          # Cache pip dependencies keyed on the requirements file so reruns
+          # restore the wheel cache instead of re-downloading every time.
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install test requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run pytest
+        run: pytest -q
