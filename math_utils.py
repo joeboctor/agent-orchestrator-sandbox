@@ -1,4 +1,4 @@
-"""Simple arithmetic helpers: add, sub, mul, div."""
+"""Simple arithmetic helpers: add, sub, mul, div, and is_palindrome."""
 
 
 def add(a: int | float, b: int | float) -> int | float:
@@ -21,3 +21,9 @@ def div(a: int | float, b: int | float) -> float:
     if b == 0:
         raise ZeroDivisionError("division by zero: 'b' must be non-zero")
     return a / b
+
+
+def is_palindrome(s: str) -> bool:
+    """Return True if s is a palindrome (case-insensitive, alphanumerics only)."""
+    normalized = [ch for ch in s.lower() if ch.isalnum()]
+    return normalized == normalized[::-1]
