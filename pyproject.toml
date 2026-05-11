@@ -1,0 +1,7 @@
+[tool.mypy]
+# Strict type-checking gate for the math_utils module (unit F-001-U-5).
+# We intentionally scope mypy to math_utils.py so that the rest of the
+# repo (tests, ad-hoc scripts) is not forced to be fully typed yet.
+strict = true
+python_version = "3.10"
+files = ["math_utils.py"]
