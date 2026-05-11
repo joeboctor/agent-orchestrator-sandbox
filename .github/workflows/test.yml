@@ -33,5 +33,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
 
-      - name: Run pytest
+      - name: Run pytest with coverage gate
+        # Coverage flags (--cov=math_utils --cov-fail-under=100) are
+        # configured in [tool.pytest.ini_options] addopts in pyproject.toml,
+        # so plain `pytest -q` enforces the 100% threshold. CI fails if
+        # coverage of math_utils drops below 100%.
         run: pytest -q
