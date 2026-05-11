@@ -1,4 +1,4 @@
-"""Simple arithmetic helpers: add, sub, mul, div."""
+"""Simple arithmetic helpers: add, sub, mul, div, factorial."""
 
 
 def add(a: int | float, b: int | float) -> int | float:
@@ -21,3 +21,14 @@ def div(a: int | float, b: int | float) -> float:
     if b == 0:
         raise ZeroDivisionError("division by zero: 'b' must be non-zero")
     return a / b
+
+
+def factorial(n: int) -> int:
+    """Return n! recursively; raises ValueError for negative n."""
+    if n < 0:
+        raise ValueError("factorial is undefined for negative integers")
+    if n == 0:
+        return 1
+    if n == 1:
+        return n
+    return n * factorial(n - 1)

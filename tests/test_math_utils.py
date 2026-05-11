@@ -143,3 +143,30 @@ def test_div_by_zero_with_zero_numerator_still_raises():
     # 0 / 0 should also raise ZeroDivisionError per the spec ("b == 0").
     with pytest.raises(ZeroDivisionError):
         math_utils.div(0, 0)
+
+
+# ---------------------------------------------------------------------------
+# factorial(n)
+# ---------------------------------------------------------------------------
+
+def test_factorial_zero():
+    # 0! is defined as 1.
+    assert math_utils.factorial(0) == 1
+
+
+def test_factorial_one():
+    # 1! == 1 (the spec says "n for n=1", which for n=1 is also 1).
+    assert math_utils.factorial(1) == 1
+
+
+def test_factorial_five():
+    assert math_utils.factorial(5) == 120
+
+
+def test_factorial_ten():
+    assert math_utils.factorial(10) == 3_628_800
+
+
+def test_factorial_negative_raises_value_error():
+    with pytest.raises(ValueError):
+        math_utils.factorial(-3)
